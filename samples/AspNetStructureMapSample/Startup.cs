@@ -13,7 +13,12 @@ namespace AspNetStructureMapSample
     {
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMultitenancy<AppTenant, AppTenantResolver>();
+			services.AddLogging(builder =>
+			{
+				builder.AddConsole();
+			});
+
+			services.AddMultitenancy<AppTenant, AppTenantResolver>();
 
             var container = new Container();
 
@@ -35,11 +40,10 @@ namespace AspNetStructureMapSample
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(LogLevel.Debug);
-			
-            app.UseMultitenancy<AppTenant>();
+
+			app.UseMultitenancy<AppTenant>();
             app.UseTenantContainers<AppTenant>();
 
             app.UseMiddleware<LogTenantMiddleware>();

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>2.0.0</Version>
+    <Authors>SaasKit Contributors</Authors>
     <Description>Multi-tenancy support for ASP.NET Core using StructureMap.</Description>
     <VersionPrefix>1.1.4</VersionPrefix>
     <Authors>Ben Foster</Authors>
-    <TargetFrameworks>netstandard1.3</TargetFrameworks>
     <AssemblyName>SaasKit.Multitenancy.StructureMap</AssemblyName>
     <PackageId>SaasKit.Multitenancy.StructureMap</PackageId>
     <PackageTags>Multi-tenancy;Multitenant;Multitenancy;Multitenant;Saas;StructureMap</PackageTags>
@@ -18,11 +20,11 @@
     <ProjectReference Include="../SaasKit.Multitenancy/SaasKit.Multitenancy.csproj"/>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.0.2"/>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="1.0.2"/>
-    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="1.0.2"/>
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="1.0.2"/>
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.0.2"/>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0"/>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.3.0"/>
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="9.0.4"/>
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.4"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.4"/>
     <PackageReference Include="StructureMap" Version="4.5.1"/>
   </ItemGroup>
 </Project>

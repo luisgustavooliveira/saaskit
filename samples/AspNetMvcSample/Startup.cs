@@ -1,26 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AspNetMvcSample.Models;
 using AspNetMvcSample.Services;
-using Microsoft.Extensions.Options;
-using SaasKit.Multitenancy;
-using Microsoft.Extensions.Logging.Console;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Hosting;
 
 namespace AspNetMvcSample
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
@@ -37,7 +30,11 @@ namespace AspNetMvcSample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMultitenancy<AppTenant, CachingAppTenantResolver>();
+			services.AddLogging(builder =>
+			{
+				builder.AddConsole();
+			});
+			services.AddMultitenancy<AppTenant, CachingAppTenantResolver>();
 
 			// Add framework services.
 			services
@@ -62,13 +59,13 @@ namespace AspNetMvcSample
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));           
-            loggerFactory.AddDebug(LogLevel.Debug);
 
             if (env.IsDevelopment())
             {
@@ -82,16 +79,18 @@ namespace AspNetMvcSample
 			
             app.UseStaticFiles();
             app.UseMultitenancy<AppTenant>();
-            app.UseIdentity();
 
             // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-        }
+            app.UseRouting();
+            app.UseAuthorization();
+
+			app.UseEndpoints(configure =>
+			{
+				configure.MapControllerRoute(
+					name: "default",
+					pattern: "{controller=Home}/{action=Index}/{id?}");
+			});
+		}
     }
 }

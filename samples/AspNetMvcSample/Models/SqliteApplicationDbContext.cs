@@ -1,18 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
-using System.IO;
 
 namespace AspNetMvcSample.Models
 {
     // https://docs.microsoft.com/en-us/ef/
     public class SqliteApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        private readonly IHostingEnvironment env;
+        private readonly IWebHostEnvironment env;
         private readonly AppTenant tenant;
 
-        public SqliteApplicationDbContext(IHostingEnvironment env, AppTenant tenant)
+        public SqliteApplicationDbContext(IWebHostEnvironment env, AppTenant tenant)
         {
             this.env = env;
             this.tenant = tenant;

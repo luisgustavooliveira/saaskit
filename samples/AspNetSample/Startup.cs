@@ -9,41 +9,44 @@ using SaasKit.Multitenancy;
 
 namespace AspNetSample
 {
-    public class Startup
-    {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMultitenancy<AppTenant, CachingAppTenantResolver>();
-        }
+	public class Startup
+	{
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddLogging(builder =>
+			{
+				builder.AddConsole();
+			});
+			services.AddMultitenancy<AppTenant, CachingAppTenantResolver>();
+		}
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {
-            loggerFactory.AddConsole(LogLevel.Debug);
-			
-            app.Map(
-                new PathString("/onboarding"),
-                branch => branch.Run(async ctx =>
-                {
-                    await ctx.Response.WriteAsync("Onboarding");
-                })
-            );
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+		{
+			app.Map(
+				new PathString("/onboarding"),
+				branch => branch.Run(async ctx =>
+				{
+					await ctx.Response.WriteAsync("Onboarding");
+				})
+			);
 
-            app.UseMultitenancy<AppTenant>();
+			app.UseMultitenancy<AppTenant>();
 
-            app.Use(async (ctx, next) =>
-            {
-                if (ctx.GetTenant<AppTenant>().Name == "Default")
-                {
-                    ctx.Response.Redirect("/onboarding");
-                } else
-                {
-                    await next();
-                }
-            });
+			app.Use(async (ctx, next) =>
+			{
+				if (ctx.GetTenant<AppTenant>().Name == "Default")
+				{
+					ctx.Response.Redirect("/onboarding");
+				}
+				else
+				{
+					await next();
+				}
+			});
 
-            app.UseMiddleware<LogTenantMiddleware>();
-        }
-    }
+			app.UseMiddleware<LogTenantMiddleware>();
+		}
+	}
 
     public class LogTenantMiddleware
     {

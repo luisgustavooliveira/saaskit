@@ -257,24 +257,27 @@ namespace SaasKit.Multitenancy.Tests
             }
         }
 
-        class TestHarness
-        {
-            static ILoggerFactory loggerFactory = new LoggerFactory().AddConsole();
+		class TestHarness
+		{
+			static ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
+			{
+				builder.AddConsole();
+			});
 
-            public IMemoryCache Cache = new MemoryCache(new MemoryCacheOptions()
-            {
-                // for testing purposes, we'll scan every 100 milliseconds
-                ExpirationScanFrequency = TimeSpan.FromMilliseconds(100),
-                Clock = new SystemClock()
-            });
+			public IMemoryCache Cache = new MemoryCache(new MemoryCacheOptions()
+			{
+				// for testing purposes, we'll scan every 100 milliseconds
+				ExpirationScanFrequency = TimeSpan.FromMilliseconds(100),
+				Clock = new SystemClock()
+			});
 
-            public TestHarness(bool disposeOnEviction = true, int cacheExpirationInSeconds = 10, bool evictAllOnExpiry = true)
-            {
-                var options = new MemoryCacheTenantResolverOptions { DisposeOnEviction = disposeOnEviction, EvictAllEntriesOnExpiry = evictAllOnExpiry };
-                Resolver = new TestTenantMemoryCacheResolver(Cache, loggerFactory, options, cacheExpirationInSeconds);
-            }
+			public TestHarness(bool disposeOnEviction = true, int cacheExpirationInSeconds = 10, bool evictAllOnExpiry = true)
+			{
+				var options = new MemoryCacheTenantResolverOptions { DisposeOnEviction = disposeOnEviction, EvictAllEntriesOnExpiry = evictAllOnExpiry };
+				Resolver = new TestTenantMemoryCacheResolver(Cache, loggerFactory, options, cacheExpirationInSeconds);
+			}
 
-            public ITenantResolver<TestTenant> Resolver { get; }
-        }
+			public ITenantResolver<TestTenant> Resolver { get; }
+		}
     }
 }
