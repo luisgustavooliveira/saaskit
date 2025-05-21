@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C3B2A3F2-5EF9-4128-8035-255A1AC1AF7B}"
 	ProjectSection(SolutionItems) = preProject
@@ -24,7 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy.Struct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetStructureMapSample", "samples\AspNetStructureMapSample\AspNetStructureMapSample.csproj", "{7CD02227-F58B-4050-88F3-3ED06FE54FFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetMvcAuthDemo", "samples\AspNetMvcAuthDemo\AspNetMvcAuthDemo.csproj", "{B04B465A-636D-4660-8D0E-560FB4640509}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetMvcAuthDemo", "samples\AspNetMvcAuthDemo\AspNetMvcAuthDemo.csproj", "{2E3FB8CB-C097-19D6-EE0D-F104FEE87241}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -108,18 +108,18 @@ Global
 		{7CD02227-F58B-4050-88F3-3ED06FE54FFD}.Release|x64.Build.0 = Release|Any CPU
 		{7CD02227-F58B-4050-88F3-3ED06FE54FFD}.Release|x86.ActiveCfg = Release|Any CPU
 		{7CD02227-F58B-4050-88F3-3ED06FE54FFD}.Release|x86.Build.0 = Release|Any CPU
-		{B04B465A-636D-4660-8D0E-560FB4640509}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B04B465A-636D-4660-8D0E-560FB4640509}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B04B465A-636D-4660-8D0E-560FB4640509}.Debug|x64.ActiveCfg = Debug|x64
-		{B04B465A-636D-4660-8D0E-560FB4640509}.Debug|x64.Build.0 = Debug|x64
-		{B04B465A-636D-4660-8D0E-560FB4640509}.Debug|x86.ActiveCfg = Debug|x86
-		{B04B465A-636D-4660-8D0E-560FB4640509}.Debug|x86.Build.0 = Debug|x86
-		{B04B465A-636D-4660-8D0E-560FB4640509}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B04B465A-636D-4660-8D0E-560FB4640509}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B04B465A-636D-4660-8D0E-560FB4640509}.Release|x64.ActiveCfg = Release|x64
-		{B04B465A-636D-4660-8D0E-560FB4640509}.Release|x64.Build.0 = Release|x64
-		{B04B465A-636D-4660-8D0E-560FB4640509}.Release|x86.ActiveCfg = Release|x86
-		{B04B465A-636D-4660-8D0E-560FB4640509}.Release|x86.Build.0 = Release|x86
+		{2E3FB8CB-C097-19D6-EE0D-F104FEE87241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E3FB8CB-C097-19D6-EE0D-F104FEE87241}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E3FB8CB-C097-19D6-EE0D-F104FEE87241}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2E3FB8CB-C097-19D6-EE0D-F104FEE87241}.Debug|x64.Build.0 = Debug|Any CPU
+		{2E3FB8CB-C097-19D6-EE0D-F104FEE87241}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2E3FB8CB-C097-19D6-EE0D-F104FEE87241}.Debug|x86.Build.0 = Debug|Any CPU
+		{2E3FB8CB-C097-19D6-EE0D-F104FEE87241}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E3FB8CB-C097-19D6-EE0D-F104FEE87241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E3FB8CB-C097-19D6-EE0D-F104FEE87241}.Release|x64.ActiveCfg = Release|Any CPU
+		{2E3FB8CB-C097-19D6-EE0D-F104FEE87241}.Release|x64.Build.0 = Release|Any CPU
+		{2E3FB8CB-C097-19D6-EE0D-F104FEE87241}.Release|x86.ActiveCfg = Release|Any CPU
+		{2E3FB8CB-C097-19D6-EE0D-F104FEE87241}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,7 +129,7 @@ Global
 		{66DE6E51-4668-4DBE-81A8-F6033C30F7CF} = {3BF6E052-C932-4DD5-B5C6-3A014282CDF3}
 		{2BD23575-488B-44DB-8966-C45FDBF0E2EF} = {485AA823-29AD-4346-8857-331F81A3713C}
 		{7CD02227-F58B-4050-88F3-3ED06FE54FFD} = {3BF6E052-C932-4DD5-B5C6-3A014282CDF3}
-		{B04B465A-636D-4660-8D0E-560FB4640509} = {3BF6E052-C932-4DD5-B5C6-3A014282CDF3}
+		{2E3FB8CB-C097-19D6-EE0D-F104FEE87241} = {3BF6E052-C932-4DD5-B5C6-3A014282CDF3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {60894664-C5D7-467E-B1F6-FD2094FF2C09}

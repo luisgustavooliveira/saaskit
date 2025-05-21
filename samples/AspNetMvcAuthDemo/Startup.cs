@@ -1,15 +1,18 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.ComponentModel;
 
 namespace AspNetMvcAuthSample
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
@@ -26,21 +29,24 @@ namespace AspNetMvcAuthSample
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMultitenancy<AppTenant, CachingAppTenantResolver>();
+		{
+			services.AddLogging(builder =>
+			{
+				builder.AddConsole();
+			});
+
+			services.AddMultitenancy<AppTenant, CachingAppTenantResolver>();
 
             // Add framework services.
             services.AddMvc();
 
             services.Configure<MultitenancyOptions>(Configuration.GetSection("Multitenancy"));
-        }
+
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -58,14 +64,11 @@ namespace AspNetMvcAuthSample
 
 			app.UsePerTenant<AppTenant>((ctx, builder) =>
 			{
-				builder.UseCookieAuthentication(new CookieAuthenticationOptions()
+				builder.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+		.       AddCookie(options =>
 				{
-					AuthenticationScheme = "Cookies",
-					LoginPath = new PathString("/account/login"),
-					AccessDeniedPath = new PathString("/account/forbidden"),
-					AutomaticAuthenticate = true,
-					AutomaticChallenge = true,
-					CookieName = $"{ctx.Tenant.Id}.AspNet.Cookies"
+                    options.LoginPath = new PathString("/account/login");
+                    options.AccessDeniedPath = new PathString("/account/forbidden");
 				});
 
 				// only register for google if ClientId and ClientSecret both exist
@@ -88,7 +91,7 @@ namespace AspNetMvcAuthSample
 			app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
+					name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }

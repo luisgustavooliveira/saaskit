@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Http.Authentication;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
@@ -31,8 +31,7 @@ namespace AspNetMvcAuthSample.Controllers
 
         public async Task<IActionResult> LogOut()
         {
-            await HttpContext.Authentication.SignOutAsync("Cookies");
-
+            await HttpContext.SignOutAsync("Cookies");
             return RedirectToAction("index", "home");
         }
     }
